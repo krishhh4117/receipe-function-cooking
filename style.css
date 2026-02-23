@@ -1,11 +1,15 @@
-/* RESET */
+/* ============================================
+   RESET
+============================================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* BODY */
+/* ============================================
+   BODY
+============================================ */
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
@@ -13,7 +17,9 @@ body {
   line-height: 1.6;
 }
 
-/* HEADER */
+/* ============================================
+   HEADER
+============================================ */
 header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -31,25 +37,29 @@ header p {
   font-size: 1.2rem;
 }
 
-/* MAIN */
+/* ============================================
+   MAIN LAYOUT
+============================================ */
 main {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 1rem;
 }
 
-/* RECIPE GRID */
+/* ============================================
+   RECIPE GRID
+============================================ */
 #recipe-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  justify-content: center;
 }
 
-/* CARD */
+/* ============================================
+   RECIPE CARD
+============================================ */
 .recipe-card {
   background: white;
-  width: 300px;
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -71,12 +81,15 @@ main {
   margin-bottom: 1rem;
 }
 
-/* DIFFICULTY BADGES */
+/* ============================================
+   DIFFICULTY BADGES
+============================================ */
 .difficulty {
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 .difficulty.easy {
@@ -92,4 +105,196 @@ main {
 .difficulty.hard {
   background: #f8d7da;
   color: #721c24;
+}
+
+/* ============================================
+   FILTER & SORT BUTTONS
+============================================ */
+.filter-btn,
+.sort-btn {
+  padding: 0.5rem 1rem;
+  margin: 0.3rem;
+  border: 1px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.sort-btn:hover {
+  background: #667eea;
+  color: white;
+}
+
+/* ============================================
+   CARD ACTION BUTTONS
+============================================ */
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 0.5rem;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background: #e9ecef;
+  border-color: #667eea;
+}
+
+.toggle-btn:active {
+  transform: scale(0.98);
+}
+
+/* ============================================
+   INGREDIENTS SECTION
+============================================ */
+.ingredients-container {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.ingredients-container.visible {
+  display: block;
+}
+
+.ingredients-container h4 {
+  color: #667eea;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.ingredients-container ul {
+  list-style: none;
+}
+
+.ingredients-container li {
+  padding: 0.4rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.ingredients-container li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+}
+
+/* ============================================
+   STEPS SECTION
+============================================ */
+.steps-container {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f0f8ff;
+  border-radius: 8px;
+}
+
+.steps-container.visible {
+  display: block;
+}
+
+.steps-container h4 {
+  color: #667eea;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+/* ============================================
+   MAIN STEPS LIST
+============================================ */
+.steps-list {
+  list-style: none;
+  counter-reset: step-counter;
+  padding: 0;
+}
+
+.steps-list > li {
+  counter-increment: step-counter;
+  padding: 0.6rem 0;
+  padding-left: 2rem;
+  position: relative;
+}
+
+.steps-list > li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #667eea;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* ============================================
+   SUBSTEPS (Nested Lists)
+============================================ */
+.substeps-list {
+  list-style: none;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  border-left: 2px solid #667eea;
+}
+
+.substeps-list li {
+  padding: 0.4rem 0;
+  padding-left: 1rem;
+  position: relative;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.substeps-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #667eea;
+}
+
+/* Deeper nesting */
+.substeps-list .substeps-list {
+  border-left-color: #9aa5ea;
+  padding-left: 1rem;
+}
+
+.substeps-list .substeps-list li {
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  #recipe-container {
+    grid-template-columns: 1fr;
+  }
 }
